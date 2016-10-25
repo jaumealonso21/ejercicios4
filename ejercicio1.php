@@ -18,11 +18,13 @@
 <?PHP
 
    // Conectar con el servidor de base de datos
-      $conexion = mysql_connect ("localhost", "cursophp", "")
+      //$conexion = mysql_connect ("localhost", "root", "")
+              $conexion = new mysqli ("localhost", "root", "", "ejemplo01")
          or die ("No se puede conectar con el servidor");
 
    // Seleccionar base de datos
-      mysql_select_db ("lindavista")
+      //mysql_select_db ("ejemplo01")
+              mysqli_select_db($conexion, "ejemplo01")
          or die ("No se puede seleccionar la base de datos");
 
    // Enviar consulta
@@ -36,9 +38,9 @@
       {
          print ("<TABLE>\n");
          print ("<TR>\n");
-         print ("<TH>Título</TH>\n");
+         print ("<TH>Tï¿½tulo</TH>\n");
          print ("<TH>Texto</TH>\n");
-         print ("<TH>Categoría</TH>\n");
+         print ("<TH>Categorï¿½a</TH>\n");
          print ("<TH>Fecha</TH>\n");
          print ("<TH>Imagen</TH>\n");
          print ("</TR>\n");
@@ -66,7 +68,7 @@
       else
          print ("No hay noticias disponibles");
 
-// Cerrar conexión
+// Cerrar conexiï¿½n
    mysql_close ($conexion);
 
 ?>
