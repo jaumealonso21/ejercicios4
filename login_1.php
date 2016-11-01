@@ -7,13 +7,12 @@
 </head>
 <body>
 <?php
-//Si se ha enviado
 if(isset($_REQUEST['enviar'])) {
-    $nombre = htmlspecialchars($_REQUEST['nombre']);
-    $apellido = htmlspecialchars($_REQUEST['apellido']);
-    $login = htmlspecialchars($_REQUEST['login']);
-    $password = htmlspecialchars($_REQUEST['password']);
-    $passResc = htmlspecialchars($_REQUEST['passResc']);
+    $nombre = $_REQUEST['nombre'];
+    $apellido = $_REQUEST['apellido'];
+    $login = $_REQUEST['login'];
+    $password = $_REQUEST['password'];
+    $passResc = $_REQUEST['passResc'];
     //$foto = "-";
     //$foto = $_REQUEST['foto'];
     //?><script>console.log("javascript");</script><?php
@@ -36,9 +35,6 @@ if(isset($_REQUEST['enviar'])) {
     if ($passResc == "") {
         $error = true;
         $error_passResc = "reescribe el password";
-    } else if ($password !== $passResc) {
-        $error = true;
-        $error_passResc ="el password no és el mateix";
     }
     
  // -------------------------------------- Inicio de Foto --------------------------------------------------   
@@ -70,7 +66,8 @@ if(isset($_REQUEST['enviar'])) {
           $nombreFichero = '';
    // El fichero introducido no se ha podido subir
     }else{ 
-        //$errores = $errores . "   <LI>No se ha podido subir el fichero\n";  
+        //$errores = $errores . "   <LI>No se ha podido subir el fichero\n";
+        
     }
     
     // Mover fichero de imagen a su ubicación definitiva
@@ -81,15 +78,14 @@ if(isset($_REQUEST['enviar'])) {
  // -------------------------------------- Fin de Foto ---------------------------------------------- 
 }
 
-//O no se ha enviado o ha habido algún error
 if(!isset($_REQUEST['enviar']) || isset($error)) {
 ?>
 
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" enctype="multipart/form-data" method="post">
+    <form action="login.php" enctype="multipart/form-data" method="post">
     Nombre: 
     <?php if (isset($error) && isset($error_nombre)) {//si se ha enviado y existe el error_nombre
-        echo "<input type='text' name='nombre' />";
-        echo $error_nombre."<br />";
+        echo "<input type='text' name='nombre' /><br />";
+        echo "escribe el nombre";
     } else {
         if (isset($error)&& !isset($error_nombre)) {//si se ha enviado y no existe el error nombre
             //el usuario no tiene que volver a rellenar
@@ -101,8 +97,8 @@ if(!isset($_REQUEST['enviar']) || isset($error)) {
     ?>
     Apellido:
     <?php if (isset($error) && isset($error_apellido)) {//si se ha enviado y existe el error_apellido
-        echo "<input type='text' name='apellido' />";
-        echo $error_apellido."<br />";
+        echo "<input type='text' name='apellido' /><br />";
+        echo "escribe el apellido";
     } else {
         if (isset($error)&& !isset($error_apellido)) {//si se ha enviado y no existe el error apellido
             //el usuario no tiene que volver a rellenar
@@ -114,8 +110,8 @@ if(!isset($_REQUEST['enviar']) || isset($error)) {
     ?>
     Login:
     <?php if (isset($error) && isset($error_login)) {//si se ha enviado y existe el error_login
-        echo "<input type='text' name='login' />";
-        echo $error_login."<br />";
+        echo "<input type='text' name='login' /><br />";
+        echo "escribe el login";
     } else {
         if (isset($error)&& !isset($error_login)) {//si se ha enviado y no existe el error login
             //el usuario no tiene que volver a rellenar
@@ -127,8 +123,8 @@ if(!isset($_REQUEST['enviar']) || isset($error)) {
     ?>
     Password:
     <?php if (isset($error) && isset($error_password)) {//si se ha enviado y existe el error_password
-        echo "<input type='password' name='password' />";
-        echo $error_password."<br />";
+        echo "<input type='password' name='password' /><br />";
+        echo "escribe el password";
     } else {
         if (isset($error)&& !isset($error_password)) {//si se ha enviado y no existe el error password
             //el usuario no tiene que volver a rellenar
@@ -138,10 +134,10 @@ if(!isset($_REQUEST['enviar']) || isset($error)) {
         }
     }
     ?>
-    Reescriu:
+    Reescriu: <input type="password" id="passResc" /><br />
     <?php if (isset($error) && isset($error_passResc)) {//si se ha enviado y existe el error_passResc (reescrit)
-        echo "<input type='password' name='passResc' />";
-        echo $error_passResc."<br />";
+        echo "<input type='password' name='passResc' /><br />";
+        echo "escribe el password";
     } else {
         if (isset($error)&& !isset($error_passResc)) {//si se ha enviado y no existe el error password
             //el usuario no tiene que volver a rellenar
